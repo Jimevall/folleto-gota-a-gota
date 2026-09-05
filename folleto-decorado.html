@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gota a Gota - Folleto Decorado</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f0f8ff;
+            padding: 20px;
+        }
+
+        .page {
+            width: 21cm;
+            height: 29.7cm;
+            margin: 20px auto;
+            background: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            page-break-after: always;
+        }
+
+        /* FONDO CON OLAS */
+        .page::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(to top, rgba(0, 150, 200, 0.08), transparent);
+            pointer-events: none;
+        }
+
+        .page-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* PORTADA */
+        .portada {
+            text-align: center;
+            background: linear-gradient(135deg, #0066cc 0%, #00a8cc 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .portada h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .portada .subtitulo {
+            font-size: 32px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .portada .tagline {
+            font-size: 18px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .gotas-decorativas {
+            font-size: 60px;
+            margin: 20px 0;
+            letter-spacing: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .portada .footer {
+            margin-top: 40px;
+            font-size: 14px;
+            border-top: 2px solid rgba(255, 255, 255, 0.3);
+            padding-top: 20px;
+        }
+
+        /* T\u00cdTULOS */
+        .titulo {
+            font-size: 36px;
+            color: #0066cc;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 4px solid #00a8cc;
+            padding-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .titulo .emoji {
+            font-size: 40px;
+        }
+
+        /* CONTENIDO */
+        .contenido {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .contenido p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .contenido h3 {
+            color: #0066cc;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .contenido ul {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        .contenido li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        /* CAJAS DE INFORMACI\u00d3N */
+        .info-box {
+            background: linear-gradient(135deg, #e0f4ff 0%, #f0f8ff 100%);
+            border-left: 5px solid #0066cc;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.1);
+        }
+
+        .info-box h4 {
+            color: #0066cc;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        /* GRID DE CARTAS */
+        .cartas-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .carta {
+            background: linear-gradient(135deg, #fff5e1 0%, #ffffff 100%);
+            border: 3px dashed #0066cc;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 102, 204, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .carta:hover {
+            transform: scale(1.05);
+        }
+
+        .carta .emoji-carta {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .carta .nombre-carta {
+            font-weight: bold;
+            color: #0066cc;
+            font-size: 13px;
+        }
+
+        /* P\u00c1GINA CON IMAGEN */
+        .page-imagen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .page-imagen img {
+            max-width: 90%;
+            max-height: 75%;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 102, 204, 0.25);
+            margin: 20px 0;
+        }
+
+        /* EQUIPO */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .team-member {
+            background: linear-gradient(135deg, #e0f4ff 0%, #f0f8ff 100%);
+            padding: 20px;
+            border-radius: 10px;
+            border-top: 4px solid #0066cc;
+            text-align: center;
+        }
+
+        .team-member .avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #0066cc, #00a8cc);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            margin: 0 auto 10px;
+        }
+
+        .team-member h4 {
+            color: #0066cc;
+            margin-bottom: 5px;
+        }
+
+        .team-member p {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* DECORACIONES DE AGUA */
+        .water-decoration {
+            position: absolute;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .wave-top {
+            position: absolute;
+            top: -20px;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path d="M0,50 Q300,0 600,50 T1200,50 L1200,120 L0,120 Z" fill="%2300a8cc" opacity="0.1"/></svg>') repeat-x;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            color: #0066cc;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* CONTRAPORTADA */
+        .contraportada {
+            background: linear-gradient(135deg, #0066cc 0%, #00a8cc 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 50px 40px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .contraportada h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .contraportada p {
+            font-size: 16px;
+            margin-bottom: 15px;
+            opacity: 0.95;
+        }
+
+        .tips {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .tips h4 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .tips-list {
+            text-align: left;
+            display: inline-block;
+        }
+
+        .tips-list li {
+            list-style: none;
+            margin: 8px 0;
+            font-size: 14px;
+        }
+
+        /* IMPRESI\u00d3N */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .page {
+                margin: 0;
+                box-shadow: none;
+                page-break-after: always;
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .page {
+                width: 100%;
+                height: auto;
+                margin: 10px auto;
+                padding: 20px;
+            }
+            .titulo {
+                font-size: 24px;
+            }
+            .cartas-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PORTADA -->
+    <div class="page">
+        <div class="wave-top"></div>
+        <div class="page-content">
+            <div class="portada">
+                <div style="font-size: 80px; margin-bottom: 20px; animation: float 3s ease-in-out infinite;">💧</div>
+                <h1>GOTA A GOTA</h1>
+                <p class="subtitulo">Cuidemos el Agua</p>
+                <div class="gotas-decorativas">💧 💧 💧</div>
+                <p class="tagline">¡Cada gota cuenta!</p>
+                <p class="tagline">Un Juego Educativo para Concienciar sobre el Agua</p>
+                <div class="footer">
+                    <p><strong>Grupo:</strong> Jimena Valverde & Nicole Salazar</p>
+                    <p><strong>Tema:</strong> Uso Responsable del Agua 🌍</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HISTORIA -->
+    <div class="page">
+        <div class="page-content">
+            <div class="titulo">
+                <span class="emoji">📖</span>
+                <span>Historia del Juego</span>
+            </div>
+            <div class="contenido">
+                <p>En un reino no muy lejano, decían que el agua era inagotable y potable. Pero de repente, ese recurso comenzó a escasear debido al desperdicio y al mal uso que ejercían los ciudadanos.</p>
+                
+                <p>Debido a esto, el reino empezó a tener dificultades para conseguir suficiente agua para sus habitantes. Ante esta situación crítica, el rey decide crear unas leyes especiales para enseñar a las personas que <strong>cada gota cuenta</strong>.</p>
+                
+                <p>Así nace <strong>"Gota a Gota, las cartas se agotan"</strong>, un juego revolucionario en el que los participantes deberán encontrar parejas de tarjetas mientras descubren diferentes acciones para cuidar y ahorrar agua.</p>
+                
+                <div class="info-box">
+                    <h4>✨ El Propósito</h4>
+                    <p>Demostrar que pequeños cambios en nuestra vida diaria pueden ayudar a proteger este recurso tan importante para todos.</p>
+                </div>
+            </div>
+        </div>
+        <div class="page-number">1</div>
+    </div>
+
+    <!-- OBJETIVOS -->
+    <div class="page">
+        <div class="page-content">
+            <div class="titulo">
+                <span class="emoji">🎯</span>
+                <span>Objetivos del Proyecto</span>
+            </div>
+            <div class="contenido">
+                <div class="info-box">
+                    <h4>🌍 Concienciar</h4>
+                    <p>Sobre el uso responsable del agua y la importancia de este recurso vital para la vida.</p>
+                </div>
+
+                <div class="info-box">
+                    <h4>🎮 Entretener</h4>
+                    <p>Mediante la gamificación y el juego interactivo de memoria que cautiva a todas las edades.</p>
+                </div>
+
+                <div class="info-box">
+                    <h4>📚 Educar</h4>
+                    <p>Sobre acciones concretas y prácticas para ahorrar y cuidar el agua en la vida cotidiana.</p>
+                </div>
+
+                <div class="info-box">
+                    <h4>💡 Motivar</h4>
+                    <p>Cambios reales en hábitos cotidianos para construir un futuro más sostenible.</p>
+                </div>
+            </div>
+        </div>
+        <div class="page-number">2</div>
+    </div>
+
+    <!-- CÓMO SE JUEGA -->
+    <div class="page">
+        <div class="page-content">
+            <div class="titulo">
+                <span class="emoji">🎲</span>
+                <span>¿Cómo Se Juega?</span>
+            </div>
+            <div class="contenido">
+                <h3>📋 Reglas Principales:</h3>
+                <ol style="margin-left: 25px; margin-bottom: 20px;">
+                    <li><strong>Voltea dos tarjetas</strong> por turno</li>
+                    <li><strong>Si forman pareja,</strong> te las quedas y juegas de nuevo</li>
+                    <li><strong>Si no coinciden,</strong> las vuelves a poner boca abajo</li>
+                    <li><strong>¡Gana!</strong> quien consiga más parejas</li>
+                </ol>
+
+                <div class="info-box">
+                    <h4>💡 Tip de Memoria</h4>
+                    <p>Recuerda dónde viste cada tarjeta para encontrar parejas en futuras rondas. ¡Usa tu concentración!</p>
+                </div>
+
+                <h3>👥 Información Técnica:</h3>
+                <ul>
+                    <li><strong>Jugadores:</strong> 2 a 6 personas</li>
+                    <li><strong>Duración:</strong> 15 a 30 minutos</li>
+                    <li><strong>Edad recomendada:</strong> 6 años en adelante</li>
+                    <li><strong>Componentes:</strong> 24 cartas (12 parejas)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="page-number">3</div>
+    </div>
+
+    <!-- CARTAS DEL JUEGO -->
+    <div class="page">
+        <div class="page-content">
+            <div class="titulo">
+                <span class="emoji">🃏</span>
+                <span>Las 12 Parejas de Cartas</span>
+            </div>
+            <div class="cartas-grid">
+                <div class="carta">
+                    <div class="emoji-carta">🚿</div>
+                    <div class="nombre-carta">Ducha Corta</div>
+                </div>
+                <div class="carta">
+                    <div class="emoji-carta">🚰</div>
+                    <div class="nombre-carta">Cierra el Grifo</div>
+                </div>
+                <div class="carta">
+                    <div class="emoji-carta">♻️</div>
+                    <div class="nombre-carta">Recicla Agua</div>
+                </div>
+                <div class="carta">
+                    <div class="emoji-carta">🧺</div>
+                    <div class="nombre-carta">Lavadora Llena</div>
+                </div>
+                <div class="carta">
+                    <div class="emoji-carta">🌱</div>
+                    <div class="nombre-carta">Riego Inteligente</div>
+                </div>
+                <div class="carta">
+                    <div class="emoji-carta">☔</div>
+                    <div class="nombre-carta">Agua de Lluvia</div>
+                </div>
+                <div class="carta">
+                    <div class="emoji-carta">⚡</div>
+                    <div class="nombre-carta">Desagüe Rápido</div>
+                </div>
+                <div class="carta">
+                    <div class="emoji-carta">🍽️</div>
+                    <div class="nombre-carta">Lava Juntos</div>
+                </div>
+                <div class="carta">
+                    <div class="emoji-carta">🌳</div>
+                    <div class="nombre-carta">Planta Árboles</div>
+                </div>
+                <div class="carta">
+                    <div class="emoji-carta">💧</div>
+                    <div class="nombre-carta">Cuida el Agua</div>
+                </div>
+                <div class="carta">
+                    <div class="emoji-carta">🪣</div>
+                    <div class="nombre-carta">Usa Cubeta</div>
+                </div>
+                <div class="carta">
+                    <div class="emoji-carta">🔍</div>
+                    <div class="nombre-carta">Filtra el Agua</div>
+                </div>
+            </div>
+            <div class="info-box" style="margin-top: 20px;">
+                <p><strong>Cada acción representa una forma de cuidar y ahorrar agua en la vida cotidiana.</strong></p>
+            </div>
+        </div>
+        <div class="page-number">4</div>
+    </div>
+
+    <!-- EQUIPO -->
+    <div class="page">
+        <div class="page-content">
+            <div class="titulo">
+                <span class="emoji">👥</span>
+                <span>Equipo Desarrollador</span>
+            </div>
+            
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="avatar">J</div>
+                    <h4>Jimena Valverde</h4>
+                    <p style="font-weight: bold; color: #0066cc; margin-bottom: 5px;">Desarrolladora & Diseñadora</p>
+                    <p>Apasionada por crear experiencias educativas interactivas y sostenibles para el futuro.</p>
+                </div>
+
+                <div class="team-member">
+                    <div class="avatar">N</div>
+                    <h4>Nicole Salazar</h4>
+                    <p style="font-weight: bold; color: #0066cc; margin-bottom: 5px;">Desarrolladora & Diseñadora</p>
+                    <p>Comprometida con la sostenibilidad ambiental y la educación en conciencia ecológica.</p>
+                </div>
+            </div>
+
+            <div class="info-box" style="margin-top: 30px;">
+                <h4>📌 Información del Proyecto</h4>
+                <p><strong>Tema:</strong> Educación Ambiental - Uso Responsable del Agua</p>
+                <p><strong>Objetivo:</strong> Concienciar sobre la importancia del agua mediante el juego y la diversión.</p>
+                <p><strong>Lema:</strong> "Gota a Gota, las cartas se agotan"</p>
+            </div>
+        </div>
+        <div class="page-number">5</div>
+    </div>
+
+    <!-- CONTRAPORTADA -->
+    <div class="page">
+        <div class="page-content">
+            <div class="contraportada">
+                <div style="font-size: 60px; margin-bottom: 20px;">💧</div>
+                <h2>¡Únete al Movimiento!</h2>
+                <p>Cada gota cuenta. Pequeños cambios en nuestros hábitos diarios pueden marcar una gran diferencia.</p>
+
+                <div class="tips">
+                    <h4>💡 5 Tips para Ahorrar Agua</h4>
+                    <ul class="tips-list">
+                        <li>🚿 Duchas cortas: máximo 5 minutos</li>
+                        <li>🚰 Cierra el grifo mientras te cepillas los dientes</li>
+                        <li>🧺 Usa la lavadora con carga completa</li>
+                        <li>🌱 Riega las plantas al atardecer</li>
+                        <li>🔧 Repara goteos y fugas inmediatamente</li>
+                    </ul>
+                </div>
+
+                <p style="margin-top: 30px; font-size: 18px;"><strong>"Gota a Gota, las cartas se agotan"</strong></p>
+                <p>Juega, aprende y conciéntate sobre la importancia del agua.</p>
+                <p style="margin-top: 20px; font-size: 14px; opacity: 0.9;">🌍 Por un planeta más sostenible 🌍</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Permitir imprimir como PDF
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+                window.print();
+            }
+        });
+    </script>
+
+</body>
+</html>
